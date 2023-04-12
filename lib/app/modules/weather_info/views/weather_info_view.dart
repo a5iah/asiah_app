@@ -37,24 +37,11 @@ class WeatherInfoView extends GetView<WeatherInfoController> {
                         weather: 'weather',
                         aqi: 'aqi'),
                     Info(
+                        controller: controller,
                         humidity: 'humidity',
                         pressure: 'pressure',
                         realfeel: 'realfeel',
                         chance_of_rain: 'chance_of_rain'),
-                    Center(
-                        child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 1, 191, 253),
-                          Color.fromARGB(255, 60, 126, 248)
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        stops: [0.0, 0.5],
-                        tileMode: TileMode.clamp,
-                      )),
-                    )),
                   ],
                 ),
         ));
@@ -138,7 +125,9 @@ class Info extends StatelessWidget {
     required this.pressure,
     required this.realfeel,
     required this.chance_of_rain,
+    required this.controller,
   });
+  final WeatherInfoController controller;
 
   final String humidity;
   final String pressure;
@@ -181,7 +170,8 @@ class Info extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("$humidity", style: infoFont),
+                  Text("${controller.weatherResponse!.current!.humidity}",
+                      style: infoFont),
                   SizedBox(
                     height: 18,
                   ),
